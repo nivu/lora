@@ -1,0 +1,66 @@
+ "gateway / 9191914224359250 / rx": {
+    "rxInfo": {
+        "mac": "9191914224359250",
+        "timestamp": 786245812,
+        "frequency": 868100000,
+        "channel": 0,
+        "rfChain": 0,
+        "crcStatus": 1,
+        "codeRate": "4/5",
+        "rssi": -49,
+        "loRaSNR": 10,
+        "size": 14,
+        "dataRate": {
+            "modulation": "LORA",
+            "spreadFactor": 12,
+            "bandwidth": 125
+        },
+        "board": 0,
+        "antenna": 0
+    },
+    "phyPayload": "gLg31gcABgAFjAFCCLA="
+},
+"gateway / 9191914224359250 / rx" : {
+    "rxInfo": {
+        "mac": "9191914224359250",
+        "timestamp": 791635364,
+        "frequency": 868300000,
+        "channel": 1,
+        "rfChain": 0,
+        "crcStatus": 1,
+        "codeRate": "4/5",
+        "rssi": -47,
+        "loRaSNR": 9.5,
+        "size": 14,
+        "dataRate": {
+            "modulation": "LORA",
+            "spreadFactor": 12,
+            "bandwidth": 125
+        },
+        "board": 0,
+        "antenna": 0
+    },
+    "phyPayload": "gLg31gcABgAFjAFCCLA="
+},
+"gateway / 9191914224359250 / rx" : {
+    "rxInfo": {
+        "mac": "9191914224359250",
+        "timestamp": 797025404,
+        "frequency": 868500000,
+        "channel": 2,
+        "rfChain": 0,
+        "crcStatus": 1,
+        "codeRate": "4/5",
+        "rssi": -51,
+        "loRaSNR": 7.5,
+        "size": 14,
+        "dataRate": {
+            "modulation": "LORA",
+            "spreadFactor": 12,
+            "bandwidth": 125
+        },
+        "board": 0,
+        "antenna": 0
+    },
+    "phyPayload": "gLg31gcABgAFjAFCCLA="
+}

@@ -1,0 +1,28 @@
+{
+    "applicationID": "3",
+    "applicationName": "ktlora",
+    "deviceName": "kt_lora_4",
+    "devEUI": "0004a30b002042aa",
+    "rxInfo": [{
+        "mac": "9191914224359250",
+        "rssi": -65,
+        "loRaSNR": 9.3,
+        "name": "microchip-gateway",
+        "latitude": 11.021174747552788,
+        "longitude": 76.93787813186647,
+        "altitude": 397
+    }],
+    "txInfo": {
+        "frequency": 868500000,
+        "dataRate": {
+            "modulation": "LORA",
+            "bandwidth": 125,
+            "spreadFactor": 7
+        },
+        "adr": true,
+        "codeRate": "4/5"
+    },
+    "fCnt": 12,
+    "fPort": 7,
+    "data": "MQ=="
+}
