@@ -1,11 +1,11 @@
 #include <SoftwareSerial.h>
-SoftwareSerial Serial1 (2, 3); //rx 2 tx 3
+SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
 
 String inputString = "";  
 
 void setup() {
   // put your setup code here, to run once:
-  Serial1.begin(57600);
+  loraSerial.begin(57600);
   Serial.begin(9600);
   
   RN2483_init();
@@ -47,22 +47,22 @@ void RN2483_init(){
 
 void sendcmd(String data){
   Serial.println(data);
-  Serial1.println(data); 
-  if(mySerial.available() > 0) {
-    inputString = Serial1.readStringUntil('\n');
+  loraSerial.println(data); 
+  if(loraSerial.available() > 0) {
+    inputString = loraSerial.readStringUntil('\n');
     Serial.println(inputString);
   }
 }
 
 void sendmsg(String data){
   Serial.println(data);
-  Serial1.println(data); 
-  if(mySerial.available() > 0) {
-    inputString = Serial1.readStringUntil('\n');
+  loraSerial.println(data); 
+  if(loraSerial.available() > 0) {
+    inputString = loraSerial.readStringUntil('\n');
     Serial.println(inputString);
   }
-  if(mySerial.available() > 0) {
-    inputString = Serial1.readStringUntil('\n');
+  if(loraSerial.available() > 0) {
+    inputString = loraSerial.readStringUntil('\n');
     Serial.println(inputString);
   }
   /*
