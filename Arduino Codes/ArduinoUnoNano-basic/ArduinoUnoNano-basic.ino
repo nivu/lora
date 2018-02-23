@@ -56,7 +56,7 @@ void setup()
   mySerial.begin(9600); //serial port to radio
   Serial.println("Startup");
 
-  initialize_radio();
+  initialize_radio();                        
 
   //transmit a startup message
   myLora.tx("TTN Mapper on TTN Enschede node");
@@ -104,9 +104,9 @@ void initialize_radio()
    * ABP: initABP(String addr, String AppSKey, String NwkSKey);
    * Paste the example code from the TTN console here:
    */
-  const char *devAddr = "061af623";
-  const char *nwkSKey = "1ce5af4045f23cf1b439e76e662e7c87";
-  const char *appSKey = "29830b609499fbf6b1d19d1c1d70b076";
+  const char *devAddr = "06960d46";
+  const char *nwkSKey = "c75167ccc9f87a634b794e1f0c8cc83b";
+  const char *appSKey = "147235d532cb50ffc7e25542fdb4f023";
 
   join_result = myLora.initABP(devAddr, appSKey, nwkSKey);
 
