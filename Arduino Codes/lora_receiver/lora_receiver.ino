@@ -1,37 +1,29 @@
 #include <SoftwareSerial.h>
-SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
+SoftwareSerial loraSerial(2, 3); //rx 2 tx 3
 
-String inputString = "";  
+String inputString = "";
 int D7 = 7;
 void setup() {
   // put your setup code here, to run once:
-    Serial.begin(9600);
+  Serial.begin(9600);
   loraSerial.begin(57600);
-  pinMode(D7,OUTPUT);
+  pinMode(D7, OUTPUT);
 
-delay(2000);
+  delay(2000);
   RN2483_init();
-  
 }
 
 void loop() {
+  sendcmd("radio rx 0");
 
-    sendcmd("radio rx 0");
-
-      if(loraSerial.available()){
+  if (loraSerial.available()) {
     String resp = loraSerial.readString();
-        Serial.println(String(resp));
-
-      }
-
-      delay(1000);
-
-    
-
-
+    Serial.println(String(resp));
+  }
+  delay(1000);
 }
 
-void RN2483_init(){
+void RN2483_init() {
 
   sendcmd("sys reset");
   sendcmd("radio set mod lora");
@@ -50,12 +42,12 @@ void RN2483_init(){
   sendcmd("radio set bw 250");
   sendcmd("sys get hweui");
   sendcmd("mac pause");
-    
+
 }
 
-void sendcmd(String data){
+void sendcmd(String data) {
   Serial.println(data);
-  loraSerial.println(data); 
-String resp = loraSerial.readStringUntil('\n');
+  loraSerial.println(data);
+  String resp = loraSerial.readStringUntil('\n');
   Serial.println(resp.length());
 }
