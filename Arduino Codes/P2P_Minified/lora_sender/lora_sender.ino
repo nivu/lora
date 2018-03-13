@@ -1,20 +1,22 @@
 //Minified
 #include <SoftwareSerial.h>
+#include <TinyGPS.h>
+
+long lat,lon;
 SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
+int nodeId = 1;
+TinyGPS gps;
 
 void setup() {
   loraSerial.begin(57600);
   Serial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
   RN2483_init();
-  int nodeId = 1;
 }
 
 void loop() {
  for(int i=0; i<=99;i++){
-  String is;
-  is = String(nodeId) + String(1);
-  is = "radio tx " + is;
+  String is = "radio tx " + String(nodeId) + String(i);
   sendmsg(is);
   delay(1000);
  }
@@ -52,15 +54,5 @@ void sendmsg(String data){
   loraSerial.println(data);
   delay(1000);         
   digitalWrite(LED_BUILTIN, LOW);  
-}
-
-String strtohex(String data){
-  String sh;
-  char ch;
-  for (int i=0;i<data.length();i++){
-    ch = data.charAt(i);
-    sh += String(ch,HEX);
-  }
-  return sh;
 }
 
