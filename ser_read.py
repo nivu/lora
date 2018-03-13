@@ -1,6 +1,6 @@
 import serial
 ser = serial.Serial(
-    port='/dev/ttyUSB2',
+    port='/dev/ttyUSB2', # for windows use COM1
     baudrate=57600,
     parity=serial.PARITY_NONE,
     stopbits=serial.STOPBITS_ONE,
