@@ -1,9 +1,9 @@
-
+//Works fine when GPS in Active mode
 #include <SoftwareSerial.h>
 #include <TinyGPS.h>
 
 long lat,lon;
- 
+SoftwareSerial gpsSerial(3,4);//rx,tx 
 TinyGPS gps;
 
 double homeLat = 11.021020;
@@ -16,32 +16,29 @@ int nodeId = 1;
 
 void setup() {
   Serial.begin(9600);
+  gpsSerial.begin(9600); // connect gps sensor 
   pinMode(LED_BUILTIN, OUTPUT);
-    pinMode(10, OUTPUT);
-
+  pinMode(10, OUTPUT);
 }
 
 void loop() { 
  
-  while(Serial.available()){ // check for gps data
-   if(gps.encode(Serial.read())){ // encode gps data
+  while(gpsSerial.available()){ // check for gps data
+   if(gps.encode(gpsSerial.read())){ // encode gps data
     gps.get_position(&lat,&lon); // get latitude and longitude
     double vlat = lat;
     double dlat = vlat/1000000;
     double vlon = lon;
     double dlon = vlon/1000000;
-    int dist = getDistanceFromLatLonInKm(homeLat, homeLng, dlat , dlon);
+    int dist = getDistanceFromLatLonInKm(gctLat, gctLng, dlat , dlon);
     Serial.println(dist);
     if(dist < 30){
       digitalWrite(LED_BUILTIN, 1);
-            digitalWrite(10, 1);
-
+      digitalWrite(10, 1);
       delay(3000);
       digitalWrite(LED_BUILTIN, 0);
-            digitalWrite(10, 0);
-
+      digitalWrite(10, 0);
     }
-
    }
   }
 

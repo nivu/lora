@@ -8,7 +8,9 @@ TinyGPS gps; // create gps object
  
 void setup(){
   Serial.begin(9600); // connect serial
-  gpsSerial.begin(4800); // connect gps sensor
+  gpsSerial.begin(9600); // connect gps sensor
+      Serial.print("GPS Start");
+
 }
  
 void loop(){

@@ -1,10 +1,12 @@
-
+// Three Serial ports
 #include <SoftwareSerial.h>
 #include <TinyGPS.h>
 
 long lat,lon;
  
 SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
+SoftwareSerial gpsSerial(8,9);//rx,tx 
+
 TinyGPS gps;
 
 double homeLat = 11.021020;
@@ -13,43 +15,39 @@ double homeLng = 76.937812;
 double gctLat = 11.020893;
 double gctLng = 76.939142;
 
-int nodeId = 1;
+int nodeId = 9;
 
 void setup() {
   Serial.begin(9600);
+  gpsSerial.begin(9600); // connect gps sensor 
   loraSerial.begin(57600);
   pinMode(LED_BUILTIN, OUTPUT);
   RN2483_init();
+  gpsSerial.listen();
 }
 
 void loop() {
-   /*
-   String is = "radio tx AA";
-   sendmsg(is);
-   delay(2000);
-  */
-  while(Serial.available()){ // check for gps data
-   if(gps.encode(Serial.read())){ // encode gps data
+  while(gpsSerial.available() > 0){ // check for gps data
+   if(gps.encode(gpsSerial.read())){ // encode gps data
     gps.get_position(&lat,&lon); // get latitude and longitude
     double vlat = lat;
     double dlat = vlat/1000000;
     double vlon = lon;
     double dlon = vlon/1000000;
     int dist = getDistanceFromLatLonInKm(gctLat, gctLng, dlat , dlon);
-    /*
-    Serial.println(dist);
-    String is = "radio tx BB";
-    sendmsg(is);
-    delay(2000);*/
+    //Serial.println(dist);
     String isss = "radio tx " + String(dist);
     sendmsg(isss);
-    delay(2000);
+    loraSerial.listen();
+    delay(1000);
    }
   }
-/*
-   String iss = "radio tx CC";
-    sendmsg(iss);
-    delay(2000);*/
+  while(loraSerial.available() > 0){
+    char loraResponse = loraSerial.read();
+    Serial.write(loraResponse);
+    gpsSerial.listen();
+  }
+
 }
 
 int getDistanceFromLatLonInKm(double lat1,double lon1,double lat2, double lon2) {
@@ -96,7 +94,6 @@ void sendmsg(String data){
   digitalWrite(LED_BUILTIN, HIGH);
   Serial.println(data);
   loraSerial.println(data);
-  delay(1000);         
   digitalWrite(LED_BUILTIN, LOW);  
 }
 

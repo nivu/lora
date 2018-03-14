@@ -1,4 +1,4 @@
-//Open Serial Port and SEnd HEX Data
+//Open Serial Port and Send HEX Data
 #include <SoftwareSerial.h>
 SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
 int nodeId = 9;
@@ -13,12 +13,13 @@ void loop() {
   while(Serial.available() > 0){
     String data = Serial.readString();
     String is;
-    is = String(nodeId) + String(data);
+    is = String(data);
     is = "radio tx " + is;
     sendmsg(is);
     delay(1000);
   }
-loraSerial.listen();
+  
+  loraSerial.listen();
   while(loraSerial.available() > 0){
     char loraResponse = loraSerial.read();
     Serial.write(loraResponse);
