@@ -5,12 +5,12 @@
 long lat,lon;
  
 SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
-SoftwareSerial gpsSerial(8,9);//rx,tx 
+SoftwareSerial gpsSerial(4,5);//rx,tx 
 
 TinyGPS gps;
 
-double homeLat = 11.021020;
-double homeLng = 76.937812;
+double citLat = 11.027706;
+double citLng = 77.026870;
 
 double gctLat = 11.020893;
 double gctLng = 76.939142;
@@ -34,17 +34,17 @@ void loop() {
     double dlat = vlat/1000000;
     double vlon = lon;
     double dlon = vlon/1000000;
-    int dist = getDistanceFromLatLonInKm(gctLat, gctLng, dlat , dlon);
+    int dist = getDistanceFromLatLonInKm(citLat, citLng, dlat , dlon);
     //Serial.println(dist);
-    String isss = "radio tx " + String(dist);
+    String isss = "radio tx " + String(dist) + "0F0" + lat + "0F0" + lon + "0F0" + nodeId;
     sendmsg(isss);
     loraSerial.listen();
-    delay(1000);
+    delay(5000);
    }
   }
   while(loraSerial.available() > 0){
-    char loraResponse = loraSerial.read();
-    Serial.write(loraResponse);
+    String loraResponse = loraSerial.readString();
+    Serial.println(loraResponse);
     gpsSerial.listen();
   }
 
@@ -88,6 +88,7 @@ void sendcmd(String data){
   Serial.println(data);
   loraSerial.println(data); 
   digitalWrite(LED_BUILTIN, LOW);
+  delay(200);
 }
 
 void sendmsg(String data){

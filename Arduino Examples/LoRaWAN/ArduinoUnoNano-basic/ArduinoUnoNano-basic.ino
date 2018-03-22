@@ -11,8 +11,8 @@ void setup()
   pinMode(13, OUTPUT);
   led_on();
 
-  Serial.begin(57600); //serial port to computer
-  mySerial.begin(9600); //serial port to radio
+  Serial.begin(9600); //serial port to computer
+  mySerial.begin(57600); //serial port to radio
   Serial.println("Startup");
 
   initialize_radio();                        
@@ -62,9 +62,9 @@ void initialize_radio()
    * ABP: initABP(String addr, String AppSKey, String NwkSKey);
    * Paste the example code from the TTN console here:
    */
-  const char *devAddr = "06960d46";
-  const char *nwkSKey = "c75167ccc9f87a634b794e1f0c8cc83b";
-  const char *appSKey = "147235d532cb50ffc7e25542fdb4f023";
+  const char *devAddr = "068bbcd9";
+  const char *nwkSKey = "5e5dd0dd3ca9275fc39cfeecaccd339a";
+  const char *appSKey = "b55a70202179669f2c7cebf404ebb932";
 
   join_result = myLora.initABP(devAddr, appSKey, nwkSKey);
 

@@ -6,8 +6,8 @@ long lat,lon;
 SoftwareSerial gpsSerial(3,4);//rx,tx 
 TinyGPS gps;
 
-double homeLat = 11.021020;
-double homeLng = 76.937812;
+double citLat = 11.022723;
+double citLng = 77.026892;
 
 double gctLat = 11.020893;
 double gctLng = 76.939142;
@@ -30,7 +30,7 @@ void loop() {
     double dlat = vlat/1000000;
     double vlon = lon;
     double dlon = vlon/1000000;
-    int dist = getDistanceFromLatLonInKm(gctLat, gctLng, dlat , dlon);
+    int dist = getDistanceFromLatLonInKm(citLat, citLng, dlat, dlon);
     Serial.println(dist);
     if(dist < 30){
       digitalWrite(LED_BUILTIN, 1);

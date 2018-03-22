@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
  
-SoftwareSerial loraSerial (10, 9); //rx 2 tx 3
+SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
 bool flag = true;
 
 void setup() {
@@ -62,6 +62,7 @@ void RN2483_init(){
 void sendcmd(String data) {
   Serial.println(data);
   loraSerial.println(data);
+  delay(200);
 }
 
 

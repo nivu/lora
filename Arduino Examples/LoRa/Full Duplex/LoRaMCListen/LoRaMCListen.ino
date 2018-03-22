@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
  
-SoftwareSerial loraSerial (10, 9); //rx 2 tx 3
+SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
 bool flag = true;
 
 void setup() {
@@ -17,8 +17,8 @@ void loop() {
   flag = false;
   loraSerial.listen();
   while (loraSerial.available() > 0) {
-    char inByte = loraSerial.read();
-    Serial.write(inByte);
+    String loraResponse = loraSerial.readString();
+    Serial.println(loraResponse);
     flag = true;
  }
  delay(1000);
