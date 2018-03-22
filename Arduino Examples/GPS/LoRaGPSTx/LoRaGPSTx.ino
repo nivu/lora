@@ -9,11 +9,9 @@ SoftwareSerial gpsSerial(4,5);//rx,tx
 
 TinyGPS gps;
 
-double citLat = 11.027706;
-double citLng = 77.026870;
-
-double gctLat = 11.020893;
-double gctLng = 76.939142;
+//11.020968, 76.937801
+double mLat = 11.020968;
+double mLng = 76.937801;
 
 int nodeId = 9;
 
@@ -21,7 +19,9 @@ void setup() {
   Serial.begin(9600);
   gpsSerial.begin(9600); // connect gps sensor 
   loraSerial.begin(57600);
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);//13
+  pinMode(9, OUTPUT);//9
+  pinMode(8, OUTPUT);//8
   RN2483_init();
   gpsSerial.listen();
 }
@@ -34,7 +34,16 @@ void loop() {
     double dlat = vlat/1000000;
     double vlon = lon;
     double dlon = vlon/1000000;
-    int dist = getDistanceFromLatLonInKm(citLat, citLng, dlat , dlon);
+    int dist = getDistanceFromLatLonInKm(mLat, mLng, dlat , dlon);
+          Serial.println(dist);
+    if(dist > 50){
+        digitalWrite(9, HIGH);
+    } else if(dist > 11000){
+        digitalWrite(8, HIGH);
+    } else {
+        digitalWrite(9, LOW);
+        digitalWrite(8, LOW);
+    }
     //Serial.println(dist);
     String isss = "radio tx " + String(dist) + "0F0" + lat + "0F0" + lon + "0F0" + nodeId;
     sendmsg(isss);
@@ -84,18 +93,14 @@ void RN2483_init(){
 }
 
 void sendcmd(String data){
-  digitalWrite(LED_BUILTIN, HIGH);
   Serial.println(data);
   loraSerial.println(data); 
-  digitalWrite(LED_BUILTIN, LOW);
   delay(200);
 }
 
 void sendmsg(String data){
-  digitalWrite(LED_BUILTIN, HIGH);
   Serial.println(data);
   loraSerial.println(data);
-  digitalWrite(LED_BUILTIN, LOW);  
 }
 
 
