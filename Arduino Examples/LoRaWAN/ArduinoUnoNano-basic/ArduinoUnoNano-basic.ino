@@ -36,6 +36,7 @@ void initialize_radio()
 
   //Autobaud the rn2483 module to 9600. The default would otherwise be 57600.
   myLora.autobaud();
+  myLora.setDR(0);
 
   //check communication with radio
   String hweui = myLora.hweui();
