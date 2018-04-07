@@ -1,0 +1,107 @@
+[
+    {
+        "downlinkMetaData": {
+            "txInfo": {
+                "mac": "9191914224359250",
+                "immediately": false,
+                "timeSinceGPSEpoch": "",
+                "timestamp": 918679692,
+                "frequency": 868100000,
+                "power": 14,
+                "dataRate": {
+                    "modulation": "LORA",
+                    "bandwidth": 125,
+                    "spreadFactor": 12,
+                    "bitrate": 125
+                },
+                "codeRate": "4/5",
+                "iPol": true,
+                "board": 0,
+                "antenna": 0
+            }
+        },
+        "phyPayload": {
+            "mhdr": {
+                "mType": "UnconfirmedDataDown",
+                "major": "LoRaWANR1"
+            },
+            "macPayload": {
+                "fhdr": {
+                    "devAddr": "0735ea6c",
+                    "fCtrl": {
+                        "adr": true,
+                        "adrAckReq": false,
+                        "ack": true,
+                        "fPending": false,
+                        "classB": false
+                    },
+                    "fCnt": 46,
+                    "fOpts": [
+                        {
+                            "cid": "RXTimingSetupReq",
+                            "payload": {
+                                "delay": 1
+                            }
+                        }
+                    ]
+                },
+                "fPort": null,
+                "frmPayload": null
+            },
+            "mic": "2ec815cd"
+        }
+    },
+    {
+        "uplinkMetaData": {
+            "rxInfo": [
+                {
+                    "mac": "9191914224359250",
+                    "time": "",
+                    "timeSinceGPSEpoch": "",
+                    "timestamp": 917679692,
+                    "rssi": -115,
+                    "loRaSNR": -17.3,
+                    "board": 0,
+                    "antenna": 0
+                }
+            ],
+            "txInfo": {
+                "frequency": 868100000,
+                "dataRate": {
+                    "modulation": "LORA",
+                    "bandwidth": 125,
+                    "spreadFactor": 12,
+                    "bitrate": 0
+                },
+                "codeRate": "4/5"
+            }
+        },
+        "phyPayload": {
+            "mhdr": {
+                "mType": "ConfirmedDataUp",
+                "major": "LoRaWANR1"
+            },
+            "macPayload": {
+                "fhdr": {
+                    "devAddr": "0735ea6c",
+                    "fCtrl": {
+                        "adr": false,
+                        "adrAckReq": false,
+                        "ack": false,
+                        "fPending": false,
+                        "classB": false
+                    },
+                    "fCnt": 42,
+                    "fOpts": null
+                },
+                "fPort": 70,
+                "frmPayload": [
+                    {
+                        "bytes": "5URwUPNwwvw="
+                    }
+                ]
+            },
+            "mic": "687985bf"
+        }
+    }
+]
