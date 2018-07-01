@@ -4,8 +4,9 @@
 SoftwareSerial mySerial(2, 3); // RX, TX
 
 rn2xx3 myLora(mySerial);
-  
+
 int sensorPin = 10;
+int opPin = 9;
 
 void setup()
 {
@@ -13,7 +14,7 @@ void setup()
   // Custom
   pinMode(sensorPin, INPUT);
   pinMode(9, OUTPUT);
-
+  
   //output LED pin
   pinMode(13, OUTPUT);
   led_on();
@@ -24,7 +25,7 @@ void setup()
 
   initialize_radio();                        
 
-  myLora.tx("TTN Mapper on TTN Enschede node");
+  myLora.tx("KT LoRa Mote Test Ping");
 
   led_off();
   delay(2000);
@@ -70,11 +71,19 @@ void initialize_radio()
    * ABP: initABP(String addr, String AppSKey, String NwkSKey);
    * Paste the example code from the TTN console here:
    */
-// Keys Node 2
-  const char *devAddr = "067edabb";
-  const char *nwkSKey = "13ed40fbea439c6223bc359a2894ef39";
-  const char *appSKey = "7165c75fd637f75b0511f735e1a86713";
 
+   // Keys Node 6
+/*
+  const char *devAddr = "07ba53c5";
+  const char *nwkSKey = "f95cf984b177a39a449d179f73f66535";
+  const char *appSKey = "2dcf333986cbea75ee3ea441b073464b";
+*/
+
+   // Keys Node 1
+  const char *devAddr = "066d4be0";
+  const char *nwkSKey = "705e71aac1ea676f417b8e626e05afd7";
+  const char *appSKey = "a15e332a6379af536d1e63c06c4e61ee";
+  
   join_result = myLora.initABP(devAddr, appSKey, nwkSKey);
 
   /*
@@ -102,8 +111,8 @@ void loop()
 {
     led_on();
 
-    int sensor= digitalRead(sensorPin);;
-    String data = "0004a30b001fecea,";
+    int sensor= analogRead(A0);
+    String data = "Analog : ";
     data += sensor;
 
     Serial.println("TXing " + data);
@@ -112,6 +121,12 @@ void loop()
     String received = myLora.getRx();
     received = myLora.base16decode(received);
     Serial.println("Received downlink: " + received);
+
+    if(received == "1"){
+      digitalWrite(opPin, 1);
+    } else if(received == "0"){
+      digitalWrite(opPin, 0);
+    }
 
     led_off();
     delay(5000);

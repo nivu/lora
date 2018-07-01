@@ -17,7 +17,7 @@ void setup()
 
   initialize_radio();                        
 
-  myLora.tx("TTN Mapper on TTN Enschede node");
+  myLora.tx("KT LoRa Mote Test Ping");
 
   led_off();
   delay(2000);
