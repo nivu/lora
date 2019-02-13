@@ -12,8 +12,7 @@ void setup() {
 
 void loop() {
   int sensorValue = analogRead(A0);
-  String is = sensorValue + "";
-  is = "radio tx " + is;
+  String is = "radio tx " + sensorValue;
   sendmsg(is);
   delay(2000); //Scheduled Time Delay
   
@@ -22,7 +21,6 @@ void loop() {
     char loraResponse = loraSerial.read();
     Serial.write(loraResponse);
   }
-
 }
 
 void RN2483_init(){
