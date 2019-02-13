@@ -1,0 +1,29 @@
+{
+    "applicationID": "1",
+    "applicationName": "kt-app",
+    "deviceName": "kt9",
+    "devEUI": "0004a30b001f9f3c",
+    "rxInfo": [{
+        "gatewayID": "9191914224359250",
+        "name": "kt-microchip-gateway",
+        "rssi": -51,
+        "loRaSNR": 10.8,
+        "location": {
+            "latitude": 11.0188892,
+            "longitude": 76.93548659999999,
+            "altitude": 400
+        }
+    }],
+    "txInfo": {
+        "frequency": 868100000,
+        "dr": 5
+    },
+    "adr": false,
+    "fCnt": 0,
+    "fPort": 1,
+    "data": "eydvYmplY3QnOiB7J3RlbXBTZW5zb3InOiB7JzEnOiAyMy41fX19",
+    "object": {
+        "a": "{object: {tempSensor: {1: 23.5}}}",
+        "len": 39
+    }
+}

@@ -33,7 +33,7 @@ def sendDownLink(data):
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
-    client.subscribe("application/1/device/0004a30b001f9f3c/rx")
+    client.subscribe("application/1/device/+/rx")
 
 
 def on_message(client, userdata, msg):
@@ -49,6 +49,6 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("192.168.1.104", 1883, 60)
+client.connect("192.168.0.113", 1883, 60)
 
 client.loop_forever()

@@ -11,8 +11,7 @@ void setup() {
 }
 
 void loop() {
-  int sensorValue = analogRead(A0);
-  String is = String(sensorValue);
+  String is = "FF";
   is = "radio tx " + is;
   sendmsg(is);
   delay(2000); //Scheduled Time Delay
@@ -53,7 +52,7 @@ void sendcmd(String data){
 
 void sendmsg(String data){
   digitalWrite(LED_BUILTIN, HIGH);
-  Serial.println(data);
+  Serial.println(data); 
   loraSerial.println(data);
   digitalWrite(LED_BUILTIN, LOW);  
 }

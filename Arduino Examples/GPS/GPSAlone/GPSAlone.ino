@@ -3,7 +3,7 @@
  
 long lat,lon; // create variable for latitude and longitude object
  
-SoftwareSerial gpsSerial(4, 5); // create gps sensor connection
+SoftwareSerial gpsSerial(4, 5); // rx, tx create gps sensor connection
 TinyGPS gps; // create gps object
  
 void setup(){
