@@ -41,6 +41,8 @@ void initialize_radio(){
 
   //Autobaud the rn2483 module to 9600. The default would otherwise be 57600.
   myLora.autobaud();
+
+  // DR Ref : https://blog.dbrgn.ch/2017/6/23/lorawan-data-rates/
   myLora.setDR(0); // sf12, bw 125khz, bps 250 
 
   //check communication with radio
@@ -95,8 +97,8 @@ void initialize_radio(){
 // the loop routine runs over and over again forever:
 void loop(){
     led_on();
-
-    int sensor= digitalRead(sensorPin);;
+    readTemp();
+    int sensor = tempPayload;
     String data = "0004a30b001fecea,";
     data += sensor;
 
@@ -119,3 +121,42 @@ void led_off(){
   digitalWrite(13, 0);
 }
 
+void readTemp() {
+    Serial.println("Temperature Sensor Listen");
+  tempSerial.listen();
+  delay(500);
+  tempPayload = "";
+  tempSerial.write(0xA5);
+  tempSerial.write(0x15);
+  tempSerial.write(0xBA);
+  
+  while (tempSerial.available()){
+    Serial.print("Taking Temperature Readings");
+    for (int counter = 0; counter <= 8; counter++){
+      output[counter] = (unsigned char)tempSerial.read();
+      Serial.print(".");
+    }
+    if (output[0] == 0x5A && output[1] == 0x5A && output[2] == 0x45){
+      need[0] = output[4];
+      need[1] = output[5];
+      needd[0] = output[6];
+      needd[1] = output[7];
+      float targetTempC = (float)(need[0] << 8 | need[1]) / 100;
+      float ambientTempC = (float)(needd[0] << 8 | needd[1]) / 100;
+
+      float targetTempF = (targetTempC * 1.8) + 32;
+      float ambientTempF = (ambientTempC * 1.8) + 32;
+      Serial.println();
+
+      // In Fahrenheit
+      Serial.print("Target Temperature is: ");
+      Serial.print(targetTempF);
+      Serial.println("F");
+      Serial.print("Ambient Temperature is: ");
+      Serial.print(ambientTempF);
+      Serial.println("F");
+      //insertTempData(targetTempF);
+      tempPayload = "t" + String(targetTempF);
+    }
+  }
+}

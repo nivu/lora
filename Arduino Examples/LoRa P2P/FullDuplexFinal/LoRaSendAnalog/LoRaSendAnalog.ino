@@ -2,7 +2,7 @@
 SoftwareSerial loraSerial (2, 3); //rx 2 tx 3
 
 int nodeId = 4; // YOur Node Id Here
-
+String txCommand;
 void setup() {
   loraSerial.begin(57600);
   Serial.begin(9600);
@@ -12,12 +12,11 @@ void setup() {
 
 void loop() {
   int sensorValue = analogRead(A0);
-  String is = sensorValue + "";
-  is = "radio tx " + is;
-  sendmsg(is);
+  txCommand = "radio tx " + sensorValue;
+  sendcmd(txCommand);
   delay(2000); //Scheduled Time Delay
   
-  loraSerial.listen();
+  //loraSerial.listen();
   while(loraSerial.available() > 0){
     char loraResponse = loraSerial.read();
     Serial.write(loraResponse);
@@ -49,21 +48,4 @@ void sendcmd(String data){
   Serial.println(data);
   loraSerial.println(data); 
   digitalWrite(LED_BUILTIN, LOW);
-}
-
-void sendmsg(String data){
-  digitalWrite(LED_BUILTIN, HIGH);
-  Serial.println(data); 
-  loraSerial.println(data);
-  digitalWrite(LED_BUILTIN, LOW);  
-}
-
-String strtohex(String data){
-  String sh;
-  char ch;
-  for (int i=0;i<data.length();i++){
-    ch = data.charAt(i);
-    sh += String(ch,HEX);
-  }
-  return sh;
 }
