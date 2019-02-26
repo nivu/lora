@@ -19,7 +19,7 @@ mac pause
   
 command for transmitting the data
  
-radio tx "data" 
+radio tx "hexdata" 
  
 command for reciving the data 
  

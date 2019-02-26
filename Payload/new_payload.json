@@ -1,0 +1,74 @@
+//gateway/9191914224359250/rx 
+{
+    "rxInfo": {
+        "mac": "9191914224359250",
+        "timestamp": 2803888668,
+        "frequency": 868100000,
+        "channel": 0,
+        "rfChain": 0,
+        "crcStatus": 1,
+        "codeRate": "4/5",
+        "rssi": -38,
+        "loRaSNR": 11,
+        "size": 14,
+        "dataRate": {
+            "modulation": "LORA",
+            "spreadFactor": 12,
+            "bandwidth": 125
+        },
+        "board": 0,
+        "antenna": 0
+    },
+    "phyPayload": "gMdkgg4AAQAB6MLB1rs="
+},
+//application/1/device/0004a30b0020096f/rx 
+{
+    "applicationID": "1",
+    "applicationName": "kt-app",
+    "deviceName": "kt1",
+    "devEUI": "0004a30b0020096f",
+    "rxInfo": [{
+        "gatewayID": "9191914224359250",
+        "name": "kt-microchip-gateway",
+        "rssi": -38,
+        "loRaSNR": 11,
+        "location": {
+            "latitude": 11.0188892,
+            "longitude": 76.93548659999999,
+            "altitude": 400
+        }
+    }],
+    "txInfo": {
+        "frequency": 868100000,
+        "dr": 0
+    },
+    "adr": false,
+    "fCnt": 1,
+    "fPort": 1,
+    "data": "gA==",
+    "object": {
+        "a": "",
+        "len": 1
+    }
+}
+//gateway/9191914224359250/tx 
+{
+    "token": 52058,
+    "txInfo": {
+        "mac": "9191914224359250",
+        "immediately": false,
+        "timestamp": 2804888668,
+        "frequency": 868100000,
+        "power": 14,
+        "dataRate": {
+            "modulation": "LORA",
+            "spreadFactor": 12,
+            "bandwidth": 125
+        },
+        "codeRate": "4/5",
+        "iPol": true,
+        "board": 0,
+        "antenna": 0
+    },
+    "phyPayload": "YMdkgg6gYwCq8Xqn"
+}

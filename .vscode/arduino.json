@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
-    "programmer": "AVR ISP",
-    "sketch": "Arduino Examples\\LoRa P2P\\Full Duplex Final\\LoRaMCListen\\LoRaMCListen.ino",
-    "port": "COM24"
+    "programmer": "ArduinoISP",
+    "sketch": "Arduino Examples\\LoRa P2P\\BioMed\\BpTxLoRa\\BpTxLoRa.ino",
+    "port": "COM13"
 }
