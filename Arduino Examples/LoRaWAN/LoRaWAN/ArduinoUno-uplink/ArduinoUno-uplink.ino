@@ -95,11 +95,13 @@ void initialize_radio(){
 // the loop routine runs over and over again forever:
 void loop(){
 
+  for(int j = 0; j < 100; j++){
+
     for(int i = 0; i < 6; i++) {
         led_on();
         //myLora.setDR(3); // dr0 = sf12, bw 125khz, bps 250 
         delay(3000);
-        String data = String(i);
+        String data = String(j);
         Serial.println("TXing " + data);
         int tx = myLora.txCnf(data); //one byte, blocking function
 
@@ -117,6 +119,7 @@ void loop(){
         led_off();
         delay(5000);
     }
+  }
 
 }
 
