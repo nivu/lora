@@ -12,6 +12,9 @@ void setup(){
   led_on();
 
   Serial.begin(9600); //serial port to computer
+
+  delay(500);
+  
   mySerial.begin(57600); //serial port to radio
   Serial.println("Startup");
 
@@ -25,10 +28,10 @@ void setup(){
 
 void initialize_radio(){
   //reset rn2483
-  pinMode(12, OUTPUT);
-  digitalWrite(12, LOW);
+  pinMode(10, OUTPUT);
+  digitalWrite(10, LOW);
   delay(500);
-  digitalWrite(12, HIGH);
+  digitalWrite(10, HIGH);
 
   delay(100); //wait for the RN2xx3's startup message
   mySerial.flush();

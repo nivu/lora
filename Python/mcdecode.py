@@ -7,7 +7,7 @@ import datetime
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+ str(rc))
-    client.subscribe("application/1/device/+/rx")
+    client.subscribe("application/2/device/+/rx")
 
 def on_message(client, userdata, msg):
     #print(msg.topic + " " + str(msg.payload))
@@ -19,12 +19,12 @@ def on_message(client, userdata, msg):
     for i in range(9):
         print(head[i], " :: ", row[i])
     print(" ")
-    with open('app1_data.csv', 'a') as csvFile:
+    with open('app2_data.csv', 'a') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(row)
     csvFile.close()
 
-client = mqtt.Client(client_id="decode", clean_session=True, userdata=None)
+client = mqtt.Client(client_id="mcdecode", clean_session=True, userdata=None)
 
 client.on_connect = on_connect
 client.on_message = on_message

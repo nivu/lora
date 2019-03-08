@@ -18,9 +18,6 @@ void setup(){
   pinMode(13, OUTPUT);
   led_on();
 
-  gpsSerial.begin(9600); // connect gps sensor
-  Serial.print("GPS Start");
-
   Serial.begin(9600); //serial port to computer
   mySerial.begin(57600); //serial port to radio
   Serial.println("Startup");
@@ -28,6 +25,10 @@ void setup(){
   initialize_radio();                        
 
   myLora.tx("ping");
+
+  delay(1000);
+  gpsSerial.begin(9600); // connect gps sensor
+  Serial.print("GPS Start");
 
   led_off();
   delay(2000);
@@ -92,14 +93,31 @@ DR5 SF7
     join_result = myLora.init();
   }
   Serial.println("Successfully joined loraserver");
+  gpsSerial.listen();
 
 }
 
 // the loop routine runs over and over again forever:
 void loop(){
+    while(gpsSerial.available()){ // check for gps data
+        if(gps.encode(gpsSerial.read())){ // encode gps data
+            gps.get_position(&lat,&lon); // get latitude and longitude
+            gps.get_datetime(&gdate, &gtime);
+            // display position
+            Serial.print("Position: ");
+            Serial.print("lat: ");Serial.print(lat);Serial.print(" ");// print latitude
+            Serial.print("lon: ");Serial.print(lon);Serial.print(" "); // print longitude
+            Serial.print("time: ");Serial.println(gtime);
+            String data = String(lat) + "," + String(lon) + "," + String(gtime);
+            sendLoRaTX(data);
+            delay(5000);
+        }
+    }
+}
+
+
+void sendLoRaTX(String data) {
     led_on();
-    readGps();
-    String data = String(lat) + "," + String(lon) + "," + String(gtime);
     Serial.println("TXing " + data);
     int tx = myLora.txCnf(data); //one byte, blocking function
 
@@ -114,34 +132,6 @@ void loop(){
         Serial.println("Received downlink: " + received);
     }
     led_off();
-    delay(5000);
-}
-
-
-void readGps() {
-    Serial.println("Reading GPS Coordinates");
-    gpsSerial.listen();
-    delay(500);
-    Serial.println(gpsSerial.isListening());
-    Serial.println(mySerial.isListening());
-    gpsSerial.write("1");
-
-    while(gpsSerial.available()){ // check for gps data
-        if(gps.encode(gpsSerial.read())){ // encode gps data
-            gps.get_position(&lat,&lon); // get latitude and longitude
-            gps.get_datetime(&gdate, &gtime);
-            // display position
-            Serial.print("Position: ");
-            Serial.print("lat: ");Serial.print(lat);Serial.print(" ");// print latitude
-            Serial.print("lon: ");Serial.print(lon);Serial.print(" "); // print longitude
-            Serial.print("time: ");Serial.println(gtime);
-            mySerial.listen();
-            delay(500);
-            Serial.println(gpsSerial.isListening());
-            Serial.println(mySerial.isListening());
-            break;
-        }
-    }
 }
 
 void led_on(){

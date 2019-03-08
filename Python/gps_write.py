@@ -29,7 +29,7 @@ client = mqtt.Client(client_id="gps_write", clean_session=True, userdata=None)
 client.on_connect = on_connect
 client.on_message = on_message
 
-#client.connect("192.168.43.33", 1883, 60)
-client.connect("192.168.0.120", 1883, 60)
+client.connect("192.168.43.158", 1883, 60)
+#client.connect("192.168.0.120", 1883, 60)
 
 client.loop_forever()
