@@ -14,16 +14,28 @@ ser = serial.Serial(
 def lora_ser(cmd):
     print(cmd)
     cmdrn = cmd + "\r\n"
-    ser.write(str.encode(cmdrn)) 
-    print(ser.readline())
+    ser.write(str.encode(cmdrn))
     while ser.in_waiting:
-        print(ser.readline())
+        print(ser.readline().decode('utf-8'))
+    #print(rx1)
+    #print(rx1.find('no'))
+    # if(rx1[2].find('no') != 0):
+    #     print(ser.readline().decode('utf-8'))
+    # else:
+    #     print("no")
     print()
 
-lora_ser("sys reset")
+def lora_ser_cmd(cmd):
+    print(cmd)
+    cmdrn = cmd + "\r\n"
+    ser.write(str.encode(cmdrn))
+    print(ser.readline())
+    print()
+
+lora_ser_cmd("sys reset")
 time.sleep(2)
 lora_ser("mac join abp")
-time.sleep(2)
+time.sleep(3)
 
 # Ref : https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html
 channelId = 3
@@ -53,6 +65,6 @@ while 1:
     tx = ("mac tx cnf %d %s" % (fPort, str(fPort).encode().hex()))
     lora_ser(tx)
     fPort += 1
-    time.sleep(3)
+    time.sleep(10)
 
 

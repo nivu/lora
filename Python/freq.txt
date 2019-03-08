@@ -1,0 +1,28 @@
+17:49:53.341 > mac set ch freq 3 865062500
+17:49:53.374 > ok
+17:49:53.374 > mac set ch drrange 3 0 5
+17:49:53.393 > ok
+17:49:53.393 > mac set ch dcycle 3 9
+17:49:53.409 > ok
+17:49:53.409 > mac set ch status 3 on
+17:49:53.421 > 
+
+
+
+17:50:53.787 > mac set ch freq 4 865402500
+17:50:53.819 > ok
+17:50:53.819 > mac set ch drrange 4 0 5
+17:50:53.837 > ok
+17:50:53.837 > mac set ch dcycle 4 9
+17:50:53.851 > ok
+17:50:53.851 > mac set ch status 4 on
+17:50:53.867 > ok
+
+18:25:14.706 > mac get ch freq 5
+18:25:14.735 > 865985000
+18:25:14.736 > mac get ch drrange 5
+18:25:14.753 > 0 5
+18:25:14.753 > mac get ch dcycle 5
+18:25:14.767 > 302
+18:25:14.767 > mac get ch status 5
+18:25:14.784 > on

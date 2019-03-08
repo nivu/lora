@@ -90,7 +90,7 @@ void initialize_radio(){
     delay(60000); //delay a minute before retry
     join_result = myLora.init();
   }
-  Serial.println("Successfully joined TTN");
+  Serial.println("Successfully joined loraserver");
 
 }
 
@@ -122,7 +122,7 @@ void led_off(){
 }
 
 void readTemp() {
-    Serial.println("Temperature Sensor Listen");
+  Serial.println("Temperature Sensor Listen");
   tempSerial.listen();
   delay(500);
   tempPayload = "";
