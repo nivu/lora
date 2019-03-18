@@ -6,17 +6,19 @@ long lat,lon;
 SoftwareSerial gpsSerial(3,4);//rx,tx 
 TinyGPS gps;
 
-double citLat = 11.022723;
-double citLng = 77.026892;
+double citLat = 11.022723; // Input Location 1
+double citLng = 77.026892; // Input Location 1
 
-double gctLat = 11.020893;
-double gctLng = 76.939142;
+double gctLat = 11.020893; // Input Location 2
+double gctLng = 76.939142; // Input Location 2
 
 int nodeId = 1;
 
 void setup() {
   Serial.begin(9600);
-  gpsSerial.begin(9600); // connect gps sensor 
+  gpsSerial.begin(9600); // connect to gps  
+  Serial.println("GPS Start");
+
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(10, OUTPUT);
 }
@@ -26,12 +28,17 @@ void loop() {
   while(gpsSerial.available()){ // check for gps data
    if(gps.encode(gpsSerial.read())){ // encode gps data
     gps.get_position(&lat,&lon); // get latitude and longitude
-    double vlat = lat;
-    double dlat = vlat/1000000;
-    double vlon = lon;
-    double dlon = vlon/1000000;
-    int dist = getDistanceFromLatLonInKm(citLat, citLng, dlat, dlon);
+    double dlat = lat; // type casting
+    double gpslat = dlat/1000000;
+
+    double dlon = lon; // type casting
+    double gpslon = dlon/1000000;
+
+    //get distance between two coordinates
+    int dist = getDistanceFromLatLonInKm(gctLat, gctLng, gpslat, gpslon);
     Serial.println(dist);
+
+    // if distance is less than 30m do some action
     if(dist < 30){
       digitalWrite(LED_BUILTIN, 1);
       digitalWrite(10, 1);

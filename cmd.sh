@@ -36,7 +36,7 @@ application/1 -> app1 pkts -> decode.py -> app1_data.csv
 
 application/2 -> app2 pkts -> mcdecode.py -> app2_data.csv
 
-gateway/+/rx -> gw rx pkts -> gedecode.py -> print cmd
+gateway/+/rx -> gw rx pkts -> gwdecode.py -> print cmd
 
 change all device duty cycle to 9 -> 10%
 backup all data before starting experiment
