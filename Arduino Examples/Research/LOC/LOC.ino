@@ -92,10 +92,11 @@ DR5 SF7
 void loop(){
 
   for(int dr = 0; dr < 6; dr++){
-    myLora.setDR(dr); 
-    delay(3000);
 
-    for(int i = 1; i < 51; i++) {
+
+    for(int i = 1; i <= 10; i++) {
+        myLora.setDR(dr); 
+        delay(3000);
         led_on();
         
         String data = "LOC" + String(i);
