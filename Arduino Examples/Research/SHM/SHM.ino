@@ -94,15 +94,10 @@ DR5 SF7
 // the loop routine runs over and over again forever:
 void loop(){
 
-  for(int dr = 0; dr < 6; dr++){
-
-    for(int i = 1; i <= 30; i++) {
-        myLora.setDR(dr); 
-        delay(1000);
+    for(int i = 1; i <= 20; i++) {
         led_on();
         
         String data = "LOC" + String(i);
-        //String data = "SVP" + String(i);
 
         Serial.println("TXing " + data);
         int tx = myLora.txCnf(data); //one byte, blocking function
@@ -121,7 +116,6 @@ void loop(){
         led_off();
         delay(3000);
     }
-  }
 
 }
 
