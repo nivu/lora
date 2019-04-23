@@ -80,9 +80,9 @@ DR5 SF7
    */
 
   // Keys Node 096f 
-  const char *devAddr = "003b1e85";
-  const char *nwkSKey = "6e1b145a7df6f5d07db74c59b8790ce6";
-  const char *appSKey = "ae12e52276e3e94220015e8f021fc752";
+  const char *devAddr = "00b9267b";
+  const char *nwkSKey = "68e7166b69e2440da6d1e3cf47282b1e";
+  const char *appSKey = "636a57d3dfc807f4e72830030fdbf794";
 
   join_result = myLora.initABP(devAddr, appSKey, nwkSKey);
 

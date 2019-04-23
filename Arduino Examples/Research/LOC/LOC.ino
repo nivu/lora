@@ -73,9 +73,9 @@ DR5 SF7
    */
 
   // Keys Node ebcf
-  const char *devAddr = "0073b9b5";
-  const char *nwkSKey = "62458289fb73bc145e82e02a68a5b5ab";
-  const char *appSKey = "1419db3c5f4c581618b85520016bcb5d";
+  const char *devAddr = "01309a7c";
+  const char *nwkSKey = "0853a12b7e912596accc15e473c7ad23";
+  const char *appSKey = "457089a035e67cea6a1e37044bceac7c";
 
   join_result = myLora.initABP(devAddr, appSKey, nwkSKey);
 
@@ -86,7 +86,7 @@ DR5 SF7
   }
   Serial.println("Successfully joined loraserver");
 
-}
+} 
 
 // the loop routine runs over and over again forever:
 void loop(){
@@ -95,11 +95,11 @@ void loop(){
     myLora.setDR(dr); 
     delay(3000);
 
-    for(int i = 0; i < 50; i++) {
+    for(int i = 1; i < 51; i++) {
         led_on();
         
         String data = "LOC" + String(i);
-        String data = "SVP" + String(i);
+        //String data = "SVP" + String(i);
 
         Serial.println("TXing " + data);
         int tx = myLora.txCnf(data); //one byte, blocking function
