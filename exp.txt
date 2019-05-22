@@ -1,0 +1,9 @@
+sf7 bw125
+sf9 bw125
+sf11 bw125
+
+sf8 bw250
+sf10 bw250
+sf12 bw250
+
+distance 0.1, 0.25. 0.5, 1
