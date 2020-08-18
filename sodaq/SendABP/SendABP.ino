@@ -1,15 +1,15 @@
 #include <TheThingsNetwork.h>
 
 // Set your DevAddr, NwkSKey, AppSKey and the frequency plan
-const char *devAddr = "00000000";
-const char *nwkSKey = "00000000000000000000000000000000";
-const char *appSKey = "00000000000000000000000000000000";
+const char *devAddr = "26041AAF";
+const char *nwkSKey = "12C2E5AA38BF491D380CEBA5E64CF829";
+const char *appSKey = "688192EB015B551BE05C2A349549429E";
 
 #define loraSerial Serial1
 #define debugSerial Serial
 
 // Replace REPLACE_ME with TTN_FP_EU868 or TTN_FP_US915
-#define freqPlan REPLACE_ME
+#define freqPlan TTN_FP_IN865_867
 
 TheThingsNetwork ttn(loraSerial, debugSerial, freqPlan);
 

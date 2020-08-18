@@ -14,12 +14,12 @@ def on_message(client, userdata, msg):
     d = json.loads(msg.payload)
     print("###############")
     datetime_object = datetime.datetime.now()
-    row = [d['devEUI'], d['rxInfo'][0]['rssi'], d['rxInfo'][0]['loRaSNR'], d['txInfo']['frequency'], d['txInfo']['dr'], d['fCnt'], d['fPort'], base64.b64decode(str(d['data'])).decode('utf-8'), str(datetime_object), "appartment"]
-    head = ['devEUI    ', 'rssi      ', 'loraSNR   ', 'freq      ', 'dr        ', 'fCnt      ', 'fPort     ', 'data      ', 'datetime  ', 'location  ']
+    row = [d['devEUI'], d['rxInfo'][0]['time'], d['rxInfo'][0]['rssi'], d['rxInfo'][0]['loRaSNR'], str(d['rxInfo'][0]['location']), d['txInfo']['frequency'], d['txInfo']['dr'], d['fCnt'], d['fPort'], base64.b64decode(str(d['data'])).decode('utf-8'), str(datetime_object), "appartment"]
+    head = ['devEUI    ','time      ', 'rssi      ', 'loraSNR   ', 'location  ', 'freq      ', 'dr        ', 'fCnt      ', 'fPort     ', 'data      ', 'timestamp  ', 'location  ']
     for i in range(9):
         print(head[i], " :: ", row[i])
     print(" ")
-    with open('loc_data_23_04_cp.csv', 'a') as csvFile:
+    with open('shm_tim_home.csv', 'a') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(row)
     csvFile.close()
