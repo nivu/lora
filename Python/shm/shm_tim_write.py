@@ -4,6 +4,7 @@ import json
 import csv
 import datetime
 
+counter = 0
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+ str(rc))
@@ -11,14 +12,27 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     #print(msg.topic + " " + str(msg.payload))
-    d = json.loads(msg.payload)
+    my_json = msg.payload.decode('utf8').replace("'", '"')
+    d = json.loads(my_json)
     print("###############")
     datetime_object = datetime.datetime.now()
-    row = [d['devEUI'], d['rxInfo'][0]['time'], d['rxInfo'][0]['rssi'], d['rxInfo'][0]['loRaSNR'], str(d['rxInfo'][0]['location']), d['txInfo']['frequency'], d['txInfo']['dr'], d['fCnt'], d['fPort'], base64.b64decode(str(d['data'])).decode('utf-8'), str(datetime_object), "appartment"]
+    rxInfo = d['rxInfo'][0]
+    rxInfo_time = ""
+    if 'time' in rxInfo:
+        rxInfo_time = rxInfo['time']
+    else:
+        rxInfo_time = ""
+    print(rxInfo)
+    txInfo = d['txInfo']
+    print(txInfo)
+    row = [d['devEUI'], rxInfo_time, rxInfo['rssi'], rxInfo['loRaSNR'], str(rxInfo['location']), txInfo['frequency'], txInfo['dr'], d['fCnt'], d['fPort'], base64.b64decode(str(d['data'])).decode('utf-8'), str(datetime_object), "pitslab"]
     head = ['devEUI    ','time      ', 'rssi      ', 'loraSNR   ', 'location  ', 'freq      ', 'dr        ', 'fCnt      ', 'fPort     ', 'data      ', 'timestamp  ', 'location  ']
-    for i in range(9):
-        print(head[i], " :: ", row[i])
-    print(" ")
+    for i in range(len(head)):
+        print("i ", i, " :: ", head[i], " :: ", row[i])
+    global counter
+    print("counter", counter)
+    counter +=1
+    print(" end **********")
     with open('shm_tim_home.csv', 'a') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(row)
